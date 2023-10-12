@@ -1,0 +1,22 @@
+// Create a Date object representing the current time in the EST time zone
+def estTimeZone = TimeZone.getTimeZone("America/New_York")
+def currentTimeEST = new Date().with { time = time + TimeZone.getDefault().getOffset(time) - estTimeZone.getOffset(time) }
+
+// Get the current hour in EST
+def currentHour = currentTimeEST.hours
+
+// Initialize the shift name
+def currentShift = "Unknown"
+
+// Determine the shift based on the current hour
+if (currentHour >= 2 && currentHour < 10) {
+    currentShift = "1st Shift"
+} else if (currentHour >= 10 && currentHour < 14) {
+    currentShift = "2nd Shift"
+} else if (currentHour >= 14) {
+    currentShift = "3rd Shift"
+}
+
+// Print the current hour and the determined shift
+println("Current Hour (EST): $currentHour")
+println("Current Shift: $currentShift")
